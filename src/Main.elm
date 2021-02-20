@@ -40,9 +40,6 @@ main =
                 [ Font.color OneDark.cyan ]
                 (text "Scala 3")
             , el
-                [ Font.color OneDark.magenta ]
-                (text "Haskell")
-            , el
                 [ Font.color OneDark.darkRed ]
                 (text "JVM")
             , el
