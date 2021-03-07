@@ -1,0 +1,5 @@
+module BlogList exposing (..)
+
+list = [
+    
+]
