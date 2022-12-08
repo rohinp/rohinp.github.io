@@ -4,12 +4,12 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+I'm a functional progamming enthusiast.
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+An to use Richard Feynman learning technique though this blog series.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[rohin.patel@outlook.com](rohin.patel@outlook.com)
