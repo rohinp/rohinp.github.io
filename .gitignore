@@ -1,3 +1,4 @@
+_site
 .DS_Store
 .jekyll
 .jekyll-metadata
@@ -7,4 +8,5 @@ Gemfile.lock
 node_modules
 package.json
 .idea
-_site
+.jekyll-cache
+.history
