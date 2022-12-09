@@ -8,8 +8,8 @@ I'm a functional progamming enthusiast.
 
 ### More Information
 
-Intention to use `Richard Feynman learning technique` though this blog series.
+An to use Richard Feynman learning technique though this blog series.
 
 ### Contact me
 
-`rohin.patel@outlook.com`
+[rohin.patel@outlook.com](rohin.patel@outlook.com)
