@@ -4,12 +4,11 @@ title: About
 permalink: /about/
 ---
 
-I'm a functional progamming enthusiast.
+I'm a functional programming enthusiast.
 
 ### More Information
 
-An to use Richard Feynman learning technique though this blog series.
+An idea to us `Richard Feynman learning technique` throughout the blog series.
 
 ### Contact me
-
-[rohin.patel@outlook.com](rohin.patel@outlook.com)
+rohin.patel@outlook.com
