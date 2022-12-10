@@ -78,7 +78,7 @@ theme_mode: dark  # [light|dark]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: 'https://raw.githubusercontent.com/rohinp/rohinp.github.io/master/images'
+img_cdn: 'https://raw.githubusercontent.com/rohinp/blog_images/master/'
 
 # the avatar on sidebar, support local or CORS resources
 avatar: '/rohin.png'
