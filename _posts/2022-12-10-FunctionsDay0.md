@@ -12,7 +12,7 @@ mermaid: true
 ### The intended audience: `Beginner level`
 
 ### What is the article about:
-Focus on the most trivial part of functional programming(FP) .i.e functions and function composition. Though FP is all about function composition but can also include other advance elements. 
+Focus on the most trivial part of functional programming(FP) .i.e functions and function composition. Though FP is all about function composition but can also include other advance elements.
 An attempt is made not to specify any FP jargon but at times it might come up to name something or may be better name it.
 
 ### Why another blog on FP:
@@ -136,7 +136,7 @@ Why more powerful, well we will discover that soon.
    * Such kind of functions where you can pass partial one argument at a time which helps to apply function partially is called [curring](https://en.wikipedia.org/wiki/Currying). Not really important to remember the name but the idea is very useful.  
    * Obviously there can be more than two arguments in a function so for example it can be
 ```scala
-   val makeEmployee: Int => UUID => String => Employee = 
+   val makeEmployee: Int => UUID => String => Employee =
       age => uuid => name => ???
 ``` 
    * One more advantage of having functions taking one argument at a time helps to identify which set of arguments are repeating in multiple functions and abstractions can be built on top of it. This could be a bit advance thing but yeah we will get back to this interesting use case later in the article.
@@ -155,7 +155,7 @@ Getting back to the concept of passing function as argument and returning functi
 
 Passing and returning values is easy to think about because it is all concrete. But passing and returning functions/behaviours, since it is abstract you need to expand your imagination and broaden the way you use to think about code. But the question is how ? well lets checkout an example. 
 
-To give an example is always a tough ask, specially if you want the reader to relate and understand the problem in hand. For that reason we are going to pick a pattern example from the `Gang-of-Four Design Patterns` book which I'm sure most of the readers are aware if you are coming from an OOP background. Let's take an example of `Chain of responsibility` pattern. For GoF way of solution can be found here [Chain of responsibility](https://github.com/mariofusco/from-gof-to-lambda/blob/master/src/main/java/org/mfusco/fromgoftolambda/examples/chainofresponsibility/ChainOfRespGoF.java). 
+To give an example is always a tough ask, specially if you want the reader to relate and understand the problem in hand. For that reason we are going to pick a pattern example from the `Gang-of-Four Design Patterns` book which I'm sure most of the readers are aware if you are coming from an OOP background. Let's take an example of `Chain of responsibility` pattern. For GoF way of solution can be found here [Chain of responsibility](https://github.com/mariofusco/from-gof-to-lambda/blob/master/src/main/java/org/mfusco/fromgoftolambda/examples/chainofresponsibility/ChainOfRespGoF.java).
 
 ```mermaid
 
@@ -332,6 +332,8 @@ def mainParser1(myFile:File) : FileParserResult =
 mainParser1(new File("Creating a dummy file object"))
 
 /*
+Note: UNKOWN type was assumed, for termination in case file type not supported.
+
 This composition looks so much better, but we can improve more
 It is very specific to scala syntax, but I assume other
 languages might also have some kind of mechanism to achieve this
