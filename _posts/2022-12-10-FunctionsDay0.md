@@ -11,17 +11,14 @@ mermaid: true
 
 ### The intended audience: `Beginner level`
 
-### What are we talking about:
-How to use function and function composition to solve problem. Or in other words model solutions. 
-
-Basically to make the topic more palatable, tried to divide them into multiple chapters. It won't be surprise if this comes out to be a mini book or series on FP (functional programming).
-
+### What is the article about:
+Focus on the most trivial part of functional programming(FP) .i.e functions and function composition. Though FP is all about function composition but can also include other advance elements. 
 An attempt is made not to specify any FP jargon but at times it might come up to name something or may be better name it.
 
 ### Why another blog on FP:
 
 FP is a very broad topic, and there is a ton of material available online to make you explain about things like type classes, Monads, Effects and what not. 
-* There is a need also to highlight how to compose our solutions using simple functions. It might be trivial but lets document it.
+* There is a need also to highlight how to compose our solutions using simple functions.
 * Most of the material revolves around concepts from `Category theory`. Obviously it's very interesting but for a developer, new to FP can be overwhelming and at times might kill the curiosity.
 * Focus of the article is to understand functions, solve simple problems using function composition. Doing so we might touch only a subset of FP concepts. 
 * The idea is to discuss writing simple composable solutions, at least for start and once you are comfortable, then there are a ton of other materials on your fingre tips(obviously Internet) to get familiar with the FP concepts.
@@ -37,7 +34,7 @@ There is an attempt in the blog to make it programming language agnostic. Using 
 
 ### Introduction:
 
-What we are expecting from this first blog is getting acquainted with the necessary tooling required to get started writing code with functions. As [Bartosz Milewski](https://bartoszmilewski.com/) correctly pointed out to magic number [7+/-2](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two), basically it talks about human capacity on processing information in sort term. Inspired from that the articles also follow a kind of thumb rule, that no more than 5 concepts introduced at a time, and then we will just play around ideas/thoughts/concepts/techniques.
+What we are expecting from this first blog, is getting acquainted with the necessary tooling required to get started writing code with functions. As [Bartosz Milewski](https://bartoszmilewski.com/) correctly pointed out to magic number [7+/-2](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two), basically it talks about human capacity on processing information in sort term. Inspired from that the articles also follow a kind of thumb rule, that no more than 5 concepts introduced at a time, and then we will just play around ideas/thoughts/concepts/techniques.
 
 Let's pick the first handful of things which we want to cover in this blog.
 1. Understanding functions part 1 
@@ -68,6 +65,7 @@ But stay with me, once you get familiar it'll become a second nature.
 From the above example, the function creation can be divided into three parts.
 1. **Name of the function** `doubleIt` created using the `val` keyword. 
    * In general, we can pass data (here by data I mean an object or primitive type) to a function or assign data to a variable or return data from a function as return type. Example:
+
 ```scala
 /*
  Method accepting some data, processes it and responds with data.
@@ -75,13 +73,12 @@ From the above example, the function creation can be divided into three parts.
  Output: List of images which matched the given tag list.
 */
 def searchByTags(tags:List[String]):List[Image] = {
-   /*
-   * Here we created a method using `def` keyword.
-   * Method's cannot be passed and returned like functions.
-   * But scala provides a way to convert methods to functions (ETA expansion, really not important as of now.), blurring the line between methods and functions.
-   * May be for simplicity we can think those are same things with different syntax.
-   * */
- //write code.
+/*
+Here we created a method using `def` keyword.
+Method's cannot be passed and returned like functions.
+But scala provides a way to convert methods to functions (ETA expansion, really not important as of now.), blurring the line between methods and functions.
+May be for simplicity we can think those are same things with different syntax.
+*/
 }
 //for comparison will write the doubleIt function with def keyword.
 def doubleIt(a:Int):Int = 2 * a
@@ -130,7 +127,7 @@ Why more powerful, well we will discover that soon.
    * So for example. 
 ```scala
   val add : Int => Int => Int = x => y => x + y
-  val add2:Int => Int = add(2) // returns a function
+  val add2: Int => Int = add(2) // returns a function
   //calling add2 results
   add2(3) //results 5
   add2(5) //results 7
@@ -139,20 +136,230 @@ Why more powerful, well we will discover that soon.
    * Such kind of functions where you can pass partial one argument at a time which helps to apply function partially is called [curring](https://en.wikipedia.org/wiki/Currying). Not really important to remember the name but the idea is very useful.  
    * Obviously there can be more than two arguments in a function so for example it can be
 ```scala
-   val makeEmployee: UUID => String => Int => Employee = 
-      id => name => age => ???
+   val makeEmployee: Int => UUID => String => Employee = 
+      age => uuid => name => ???
 ``` 
-   * One more advantage of having functions taking one argument at time helps to identify which set of arguments are repeating in multiple functions and abstractions can be built on top of it. This could be a bit advance thing but yeah we will get back to this interesting use case later in the article.
+   * One more advantage of having functions taking one argument at a time helps to identify which set of arguments are repeating in multiple functions and abstractions can be built on top of it. This could be a bit advance thing but yeah we will get back to this interesting use case later in the article.
 3. There is not much to discuss in terms of **implementation** as well, everything which we discussed in first example applies here too.
-   * But for the sake of surety that the understanding is confirmed. The implementation is just following the type signature include number of variables and then the implementation after the last `=>` i.e `x + y`
-   
-Okay, now that we have some understanding of how to represent functions in scala. Let's jump to next topic.
+   * But again for the sake of surety that the understanding is confirmed. The implementation is just following the type signature include number of variables and then the implementation after the last `=>` i.e `x + y`
 
 #### Passing and returning a function
 Before we move forward let's do a recap.
    1. we can assign functions to variables.
    2. that means we can treat them as values.
-   3. it in turn means we can pass function values to other functions just as any other functions
+   3. it in turn means we can pass function values to other functions just as any other value.
+   4. Functions can be applied partially if we create functions which take one argument at a time (function curring).
+
+Getting back to the concept of passing function as argument and returning function as return type, the thought itself makes the brain scratch. What that means is passing and returning behaviours.
 
 
-## WIP...
+Passing and returning values is easy to think about because it is all concrete. But passing and returning functions/behaviours, since it is abstract you need to expand your imagination and broaden the way you use to think about code. But the question is how ? well lets checkout an example. 
+
+To give an example is always a tough ask, specially if you want the reader to relate and understand the problem in hand. For that reason we are going to pick a pattern example from the `Gang-of-Four Design Patterns` book which I'm sure most of the readers are aware if you are coming from an OOP background. Let's take an example of `Chain of responsibility` pattern. For GoF way of solution can be found here [Chain of responsibility](https://github.com/mariofusco/from-gof-to-lambda/blob/master/src/main/java/org/mfusco/fromgoftolambda/examples/chainofresponsibility/ChainOfRespGoF.java). 
+
+```mermaid
+
+classDiagram
+   class FileParser {
+      <<interface>>
+      +String parse(File file)*
+      +setNextParser(FileParser next)*
+   }  
+   class AbstractFileParser {
+      <<abstract>>
+      #FileParser next
+      +setNextParser(FileParser next)
+   }
+   FileParser <|-- AbstractFileParser   
+   AbstractFileParser <|-- TextFileParser : implementation
+   TextFileParser : +String parse(File file)
+   AbstractFileParser <|-- PresentationFileParser : implementation
+   PresentationFileParser : +String parse(File file)
+   AbstractFileParser <|-- AudioFileParser : implementation
+   AudioFileParser : +String parse(File file)
+   AbstractFileParser <|-- VideoFileParser : implementation
+   VideoFileParser : +String parse(File file)
+    
+```
+Probably the above class diagram is enough to explain what example we are going to implement, the only details missing in the diagram is the part where all the objects are created and the parse functions are called (Main method). The link shared above for the java implementation already contains the entire code implementation. 
+In short the input object which is a file goes through all the implementations like a chain one by one from each parse implementation. The one which matches the file type applies the parse functionality. Now let's do this using functions. 
+
+Assumption:
+   File object is something like this [File](https://github.com/mariofusco/from-gof-to-lambda/blob/master/src/main/java/org/mfusco/fromgoftolambda/examples/chainofresponsibility/File.java)
+
+```scala
+/*
+We will start by defining our own custom return type of functions
+*/
+enum FileParserResult:
+  case Success(content:String)
+  case GoNext
+  case Failure(errorMsgs:String)
+ 
+//instead of creating interfaces and implementations we will replace them with functions
+def textParser:File => FileParserResult =
+   file => {
+      Try {
+         if file.getType == File.Type.TEXT 
+         then FileParserResult.Success(file.getContent())
+         else FileParserResult.GoNext  
+      } match {
+         case Success(result) => result
+         case Failure(err) => FileParserResult.Failure(s"Failed due to error ${err.getMessage}")
+      }
+   }
+```
+
+Explanation: here `Try` is similar to the enum type `FileParserResult` we are using with a difference that it actually wraps code in a `try catch` block. Why we need `Try` is because if calling a 3rd party API we are not sure what errors it might throw. One more difference compared to `FileParserResult` is it contains only two types `Success` and `Failure` while in our case we have the third enum value `GoNext` soon we will see how it is used.
+
+We could go ahead and implement other methods analogs to other implementations of `AbstractFileParser`. But it seems to be repetitive code. With a minor difference of the file type check. So let's refactor the textParser to be a bit generic.
+
+```scala
+def parser:FileType => File => FileParserResult =
+   fileType => file => {
+      Try {
+         if fileType == File.Type.UNKNOWN
+         then FileParserResult.Failure(s"The File type is not supported.")
+         else if file.getType == fileType 
+         then FileParserResult.Success(file.getContent())
+         else FileParserResult.GoNext  
+      } match {
+         case Success(result) => result
+         case Failure(err) => FileParserResult.Failure(s"Failed due to error ${err.getMessage}")
+      }
+   }
+   
+//So we can basically now do something like this.
+val textFileParser = parser(File.Type.TEXT)
+val presentationFileParser = parser(File.Type.PRESENTATION)
+val audioFileParser = parser(File.Type.AUDIO)
+val videoFileParser = parser(File.Type.VIDEO)
+/*
+It is interesting to check how partial application of function
+works like a wonder.
+*/
+
+textFileParser(myFile) //this will parse for text or
+videoFileParser(myFile) //this for video or
+audioFileParser(myFile) //for audio, and so on
+
+```
+Next step is to write a function to compose all these functions. More like a main function. We can do this in many ways. Here we take a naive approach, and then we can start building and refactoring on top of it.
+```scala
+//First Try
+def composeFileParser(file: File): FileParserResult = {
+   val textResult = textFileParser(myFile)
+   textResult match {
+      case FileParserResult.GoNext =>
+         val audioResult = audioFileParser(File.Type.AUDIO)
+         audioResult match {
+            case FileParserResult.GoNext =>
+               val videoResult = videoFileParser(File.Type.VIDEO)
+            /*
+             We will end up with a crazy nested pattern matching
+             Or an if else conditions.
+            */
+            case failureOrSuccess =>
+               failureOrSuccess
+         }
+      case failureOrSuccess =>
+         failureOrSuccess
+
+   }
+}
+
+//A little better way 
+//when we did these calls
+val textFileParser: File => FileParserResult = parser(File.Type.TEXT)
+val presentationFileParser: File => FileParserResult = parser(File.Type.PRESENTATION)
+val audioFileParser: File => FileParserResult = parser(File.Type.AUDIO)
+val videoFileParser: File => FileParserResult = parser(File.Type.VIDEO)
+//one thing was pretty clear inorder to compose this solution
+//We need to be able to compose function of 
+// type File => FileParserResult
+//Again writing functions which take one argument at a time (curried)
+//Helped to understand the repetition of types and we 
+// can easily understand what type needs to be abstracted.
+
+//Again what we learned so far is function are values/object in FP languages.
+//In case of scala if it is a value we can use them as 
+//fields of a class, just like any other value type.
+
+//we can create classes like this, name and age are properties 
+// of the object Person.
+case class Person(name:String, age:Int):
+  def isMinor:Boolean = age < 18
+//We create Person object instance by calling the constructor
+val person = Person("SomePerson", 30)
+//call the method
+person.isMinor
+
+//similarly we can have a case class with a function as a field 
+// and have methods within it.
+case class ParserCompose(run: File => FileParserResult):
+   def andThen(nextFunction: File => FileParserResult): ParserCompose = 
+      ParserCompose {
+       file =>
+          run(file) match {
+            case FileParserResult.GoNext =>
+               nextFunction(file)
+            case errorOrSuccess =>
+               errorOrSuccess
+         }
+     }
+/*
+What we did inside the compose function might be confusing.
+could be because of syntax, specially 
+how to write an anonymous function. We will see a more detailed
+explanation later, for now if you did not get it 
+ignore the implementation and just try to get on the idea.
+Basically all the required wiring of composition we moved 
+at one place, inside ParserCompose.
+
+Here is how we can use the ParserCompose 
+*/
+
+
+def mainParser1(myFile:File) : FileParserResult = 
+   ParserCompose(parser(File.Type.TEXT))
+     .andThen(parser(File.Type.PRESENTATION))
+     .andThen(parser(File.Type.AUDIO))
+     .andThen(parser(File.Type.VIDEO))
+     .andThen(parser(File.Type.UNKNOWN))
+     .run(myFile)
+
+//calling main
+mainParser1(new File("Creating a dummy file object"))
+
+/*
+This composition looks so much better, but we can improve more
+It is very specific to scala syntax, but I assume other
+languages might also have some kind of mechanism to achieve this
+
+By just adding implicit in front of class declaration, we can make 
+a syntax class.
+*/
+
+implicit class ParserComposeOps(func: File => FileParserResult):
+   def >>>(nextFunction: File => FileParserResult): ParserCompose =
+      ParserCompose {
+         file =>
+            func(fileType) match {
+               case FileParserResult.GoNext =>
+                  nextFunction(fileType)
+               case errorOrSuccess =>
+                  errorOrSuccess
+            }
+      }
+
+val mainParser2:File => FileParserResult =
+   parser(File.Type.TEXT) 
+    >>> parser(File.Type.PRESENTATION) 
+    >>> parser(File.Type.AUDIO) 
+    >>> parser(File.Type.VIDEO) 
+    >>> parser(File.Type.UNKNOWN)
+           
+//how to call
+mainParser2(myFile)
+
+```
