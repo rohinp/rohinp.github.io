@@ -1,6 +1,6 @@
 ---
 title: Functions Day 0
-date: 2022-12-10
+date: 2022-12-16
 categories: [Functional Programming, Functions]
 tags: [functional programming, functions, basic, function composition]
 img_path: /day0/
@@ -398,7 +398,7 @@ case class ParserCompose(run: File => FileParserResult):
 6. One way to think is when we add `implicit` on a class makes the wrapper disappear and gives the functions directly to the type on which class is created. For example in our case `File => FileParserResult`.
 7. We will see more examples on the similar lines, so if the first time feels difficult it is fine.
 
-## Conclusion:
+### Conclusion:
    Despite saying that we will follow `7(+/-)2` rule. The content can be a bit heavy and might need multiple reads for the beginners. But it is fun. What we covered so far is the very details on which the future blogs will be written. In fact lot of things will again be repeated. Repetition is the key specially if you are learning a new paradigm. Okay so before we conclude will list the things which we covered so far.
    1. Functions in functional programming can be passed or returned just values/objects in other languages.
    2. Function which take one argument at a time can be applied partially. Which makes them super powerful.
