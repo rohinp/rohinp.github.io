@@ -31,7 +31,7 @@ Complexity can at times be a very subjective topic. The confusion which I want t
 
 There is an attempt in the blog to make it programming language agnostic. But using examples in scala forces us to be aware of some syntax of scala. All the required syntax will be covered in the blogs and that is one of the reason why the articles might be a bit lengthy. Also, it might inspire you to either learn scala or use these FP patterns in your day today programming.
 
-### Introduction:
+### Introduction
 
 As [Bartosz Milewski](https://bartoszmilewski.com/) correctly pointed out to magic number [7+/-2](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two), basically it talks about human capacity on processing information in a sort term. Inspired from that the articles also follow a thumb rule, that no more than 5 concepts introduced at a time, and then we will just play around ideas/thoughts/concepts/techniques.
 
@@ -42,7 +42,7 @@ Let's pick the first handful of things which we want to cover in this blog.
    * There might be a lot of scala specific discussions, w.r.t syntax and internals about functions.
 2. Passing and returning a function with example.
 
-#### Understanding functions part 1:
+### Understanding functions part 1
 
 ---
 Start with a couple of diagrams (taken from wiki). 
@@ -144,7 +144,7 @@ Why more powerful, well we will discover that soon.
 3. There is not much to discuss in terms of **implementation** as well, everything which we discussed in first example applies here too.
    * But again for the sake of surety that the understanding is confirmed. The implementation is just following the type signature include number of variables and then the implementation after the last `=>` i.e `x + y`
 
-#### Passing and returning a function
+### Passing and returning a function
 Before we move forward let's do a recap.
    1. we can assign functions to variables.
    2. that means we can treat them as values.
