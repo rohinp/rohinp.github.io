@@ -349,9 +349,9 @@ a syntax class.
 implicit class ParserComposeOps(func: File => FileParserResult):
    def >>>(nextFunction: File => FileParserResult): File => FileParserResult =
       file =>
-         func(fileType) match {
+         func(file) match {
             case FileParserResult.GoNext =>
-               nextFunction(fileType)
+               nextFunction(file)
             case errorOrSuccess =>
                errorOrSuccess
          }
@@ -405,4 +405,4 @@ case class ParserCompose(run: File => FileParserResult):
    3. Functions can be wrapped in classes and can add more behaviours on top of it. This is very specific to `scala` as it gives you power of both the worlds OO and FP.
    4. Composing functions, is not just passing the return value of one function to another. It is a complete new world, we just saw a glimpse of it here.
    5. The most important thing which we missed is function composition helps to break our problem in to smaller problems and thus giving power of writing extensive unit tests.
-   6. Check this [gist]() for complete running/compiling/tested code.
+   6. Check this [gist](https://gist.github.com/rohinp/19e498cb496a2bb0e57cb47c5aed35e4) for complete running/compiling/tested code.
