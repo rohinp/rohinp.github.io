@@ -9,31 +9,31 @@ mermaid: true
 
 # A gentle introduction to functions.
 
-### The intended audience: `Beginner level`
+## The intended audience: `Beginner level`
 
-### What is the article about:
+## What is the article about?
 Focus on the most trivial part of functional programming(FP) .i.e functions and function composition. Though FP is all about function composition but can also include other advance elements and patterns.
 An attempt is made not to specify any FP jargon but at times it might come up to name something or may be give it a better name.
 
-### Why another blog on FP:
+## Why another blog on FP?
 
 FP is a very broad topic, and there is a ton of material available online to make you explain about things like type classes, Monads, Effects and what not. Saying that:
 * There is a need also to highlight how to compose our solutions using simple functions.
-* Most of the material revolves around concepts from `Category theory`. Obviously it's very interesting but for a developer, new to FP can be overwhelming and at times might kill the curiosity.
+* Most of the available material revolves around concepts from `Category theory`. Obviously it's very interesting but for a developer, new to FP can be overwhelming and at times might kill the curiosity.
 * Focus of the article is to understand functions, solve simple problems using function composition.
 * Nevertheless, just put all the thoughts/experience which I had about programming with FP the good parts.
 * Most important it is fun!
 
-### Programming Language & Complexity:
+## Programming Language & Complexity.
 The examples are in scala, but can be demonstrated in any other programming language which supports creating and composing functions.
 
 Complexity can at times be a very subjective topic. The confusion which I want to specifically callout here is `not knowing is not equal to complex`, say it syntax or a concept. Initially there might be hiccups once you overcome those then there is no turning back.
 
 There is an attempt in the blog to make it programming language agnostic. But using examples in scala forces us to be aware of some syntax of scala. All the required syntax will be covered in the blogs and that is one of the reason why the articles might be a bit lengthy. Also, it might inspire you to either learn scala or use these FP patterns in your day today programming.
 
-### Introduction
+## Introduction.
 
-As [Bartosz Milewski](https://bartoszmilewski.com/) correctly pointed out to magic number [7+/-2](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two), basically it talks about human capacity on processing information in a sort term. Inspired from that the articles also follow a thumb rule, that no more than 5 concepts introduced at a time, and then we will just play around ideas/thoughts/concepts/techniques.
+As [Bartosz Milewski](https://bartoszmilewski.com/) correctly pointed out to magic number [7+/-2](https://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two), basically it talks about human capacity on processing information in a sort term. Inspired from that the articles also follows a thumb rule, that no more than 5 concepts introduced at a time, and then we will just play around ideas/thoughts/concepts/techniques.
 
 Let's pick the first handful of things which we want to cover in this blog.
 1. Understanding functions part 1 
@@ -42,7 +42,7 @@ Let's pick the first handful of things which we want to cover in this blog.
    * There might be a lot of scala specific discussions, w.r.t syntax and internals about functions.
 2. Passing and returning a function with example.
 
-### Understanding functions part 1
+## Understanding functions part 1.
 
 ---
 Start with a couple of diagrams (taken from wiki). 
@@ -144,7 +144,7 @@ Why more powerful, well we will discover that soon.
 3. There is not much to discuss in terms of **implementation** as well, everything which we discussed in first example applies here too.
    * But again for the sake of surety that the understanding is confirmed. The implementation is just following the type signature include number of variables and then the implementation after the last `=>` i.e `x + y`
 
-### Passing and returning a function
+## Passing and returning a function.
 Before we move forward let's do a recap.
    1. we can assign functions to variables.
    2. that means we can treat them as values.
@@ -398,11 +398,13 @@ case class ParserCompose(run: File => FileParserResult):
 6. One way to think is when we add `implicit` on a class makes the wrapper disappear and gives the functions directly to the type on which class is created. For example in our case `File => FileParserResult`.
 7. We will see more examples on the similar lines, so if the first time feels difficult it is fine.
 
-### Conclusion:
-   Despite saying that we will follow `7(+/-)2` rule. The content can be a bit heavy and might need multiple reads for the beginners. But it is fun. What we covered so far is the very details on which the future blogs will be written. In fact lot of things will again be repeated. Repetition is the key specially if you are learning a new paradigm. Okay so before we conclude will list the things which we covered so far.
-   1. Functions in functional programming can be passed or returned just values/objects in other languages.
+## Complete compiling code.
+{% gist 19e498cb496a2bb0e57cb47c5aed35e4 %}
+
+## Conclusion.
+   Despite saying that we will follow `7(+/-)2` rule. The content might be a bit heavy and may need multiple reads for beginners. What we covered so far is the very details on which the future blogs will be written. In fact a lot of things will be repeated. Repetition is the key specially if you are learning a new paradigm. Here is the list of things which we covered so far.
+   1. Functions in functional programming can be passed or returned just like values/objects in other languages.
    2. Function which take one argument at a time can be applied partially. Which makes them super powerful.
-   3. Functions can be wrapped in classes and can add more behaviours on top of it. This is very specific to `scala` as it gives you power of both the worlds OO and FP.
-   4. Composing functions, is not just passing the return value of one function to another. It is a complete new world, we just saw a glimpse of it here.
-   5. The most important thing which we missed is function composition helps to break our problem in to smaller problems and thus giving power of writing extensive unit tests.
-   6. Check this [gist](https://gist.github.com/rohinp/19e498cb496a2bb0e57cb47c5aed35e4) for complete running/compiling/tested code.
+   3. Functions can be wrapped in a class (more specifically a property of an object), this introduces a whole new world of FP. This is very specific to `scala` as it gives you power of both the worlds OO and FP.
+   4. Composing functions, is not just passing the return value of one function to another. But lot more than that, or at least it takes a lot more to build that machinery.
+   5. We did not discuss anything about error handling, logging, metrics and what not which might be part of your application development. At least for now we will focus on the general patterns which we use in day today programming and try to achieve an FP counterpart(by using simple functions & function composition). 
