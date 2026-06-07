@@ -4,11 +4,9 @@ import { notFound } from "next/navigation";
 import MarkdownContent from "@/components/MarkdownContent";
 import { getAllPostParams, getPost } from "@/lib/blog";
 
-type BlogPostPageProps = {
-  params: {
-    year: string;
-    segment: string;
-  };
+type BlogRouteParams = {
+  year: string;
+  segment: string;
 };
 
 function formatFullDate(dateIso: string) {
@@ -23,11 +21,12 @@ export async function generateStaticParams() {
   return getAllPostParams();
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<BlogRouteParams> }): Promise<Metadata> {
   try {
-    const post = await getPost(params.year, params.segment);
+    const resolved = await params;
+    const post = await getPost(resolved.year, resolved.segment);
     return {
-      title: `${post.title} · ${params.year}`,
+      title: `${post.title} · ${resolved.year}`,
       description: post.summary,
     };
   } catch {
@@ -38,9 +37,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: { params: Promise<BlogRouteParams> }) {
   try {
-    const post = await getPost(params.year, params.segment);
+    const resolved = await params;
+    const post = await getPost(resolved.year, resolved.segment);
 
     return (
       <article className="page-shell post-detail">

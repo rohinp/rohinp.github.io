@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
 import Link from "next/link";
 import Providers from "./providers";
 import "./globals.css";
-
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Rohin Patel | Build Log",
@@ -24,7 +17,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={roboto.className}>
+      <body>
         <Providers>
           <div className="app-frame">
             <header className="site-header">
