@@ -1,49 +1,31 @@
-# Chirpy Starter [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)](https://rubygems.org/gems/jekyll-theme-chirpy) [![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
+# Personal build log
 
-When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders `_includes`, `_layout`, `_sass` and `assets`, as well as a small part of options of the `_config.yml` file from the theme's gem. If you have ever installed this theme gem, you can use the command `bundle info --path jekyll-theme-chirpy` to locate these files.
+This repo now powers a lightweight Next.js site deployed via GitHub Pages. The landing page doubles as a resume surface, while `/blog` lists markdown entries grouped by year/date.
 
-The Jekyll organization claims that this is to leave the ball in the user’s court, but this also results in users not being able to enjoy the out-of-the-box experience when using feature-rich themes.
+## Requirements
 
-To fully use all the features of **Chirpy**, you need to copy the other critical files from the theme's gem to your Jekyll site. The following is a list of targets:
+- Node.js 20+
+- npm 10+
 
-```shell
-.
-├── _config.yml
-├── _data
-├── _plugins
-├── _tabs
-└── index.html
+## Setup
+
+```bash
+npm install
+npm run dev # localhost:3000
 ```
 
-In order to save your time, and to prevent you from missing some files when copying, we extract those files/configurations of the latest version of the **Chirpy** theme and the [CD][CD] workflow to here, so that you can start writing in minutes.
+`npm run build` outputs the static bundle that Pages can serve.
 
-## Prerequisites
+## Writing posts
 
-Follow the instructions in the [Jekyll Docs](https://jekyllrb.com/docs/installation/) to complete the installation of `Ruby`, `RubyGems`, `Jekyll` and `Bundler`.
+1. Create a file under `src/content/blog/<year>/<YYYY-MM-DD-slug>.md`.
+2. Use plain markdown—first level-one heading becomes the title and the first paragraph becomes the summary.
+3. Commit and push. The loader calculates reading time, sorts by date, and exposes the entry at `/blog/<year>/<filename>`.
 
-## Installation
+## Updating the resume
 
-[**Use this template**][use-template] to generate a brand new repository and name it `<GH_USERNAME>.github.io`, where `GH_USERNAME` represents your GitHub username.
+Edit `src/data/resume.ts`. All sections on the landing page map directly to the exported object, so you can drop in the final resume copy without touching components.
 
-Then clone it to your local machine and run:
+## Styling
 
-```
-$ bundle
-```
-
-## Usage
-
-Please see the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy#documentation).
-
-## License
-
-This work is published under [MIT][mit] License.
-
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[use-template]: https://github.com/cotes2020/chirpy-starter/generate
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
-
-## Local development
-```$> bundle exec jekyll s --livereload```
+The entire site sticks to a blue / black / white palette with gentle Material-inspired elevation. Shared styles live in `src/app/globals.css`, and the MUI theme is defined in `src/app/theme.ts` if you need component-level overrides.

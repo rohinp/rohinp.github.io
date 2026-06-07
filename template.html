@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuralNexus | AI/ML Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0f0f1a;
+            color: #e0e0e0;
+        }
+
+        .title-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card-gradient {
+            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid rgba(113, 128, 185, 0.2);
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(0, 219, 222, 0.3);
+        }
+
+        .glow-effect:hover {
+            box-shadow: 0 0 25px rgba(252, 0, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .neon-border {
+            position: relative;
+        }
+
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(45deg, #00dbde, #fc00ff);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 219, 222, 0.5);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .tag:hover {
+            background: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+            color: white;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-900 bg-opacity-80 backdrop-blur-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center">
+                    <i class="fas fa-brain text-white text-xl"></i>
+                </div>
+                <h1 class="title-font text-2xl font-bold gradient-text">NeuralNexus</h1>
+            </div>
+
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="text-gray-300 hover:text-white transition duration-300">Home</a>
+                <a href="#" class="text-gray-300 hover:text-white transition duration-300">Articles</a>
+                <a href="#" class="text-gray-300 hover:text-white transition duration-300">Tutorials</a>
+                <a href="#" class="text-gray-300 hover:text-white transition duration-300">Research</a>
+                <a href="#" class="text-gray-300 hover:text-white transition duration-300">About</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button class="md:hidden text-gray-300 hover:text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Search..."
+                        class="search-input bg-gray-800 rounded-full py-2 px-4 pl-10 text-white focus:ring-2 focus:ring-purple-500 w-64">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+                <button
+                    class="hidden md:block bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-2 rounded-full transition duration-300">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="title-font text-4xl md:text-6xl font-bold mb-6">
+                    Explore the <span class="gradient-text">Future</span> of AI
+                </h1>
+                <p class="text-xl text-gray-300 mb-8">
+                    Cutting-edge research, practical tutorials, and thought leadership in artificial intelligence and
+                    machine learning.
+                </p>
+                <div class="flex space-x-4">
+                    <button
+                        class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-full text-lg font-medium transition duration-300 glow-effect">
+                        Start Reading
+                    </button>
+                    <button
+                        class="border border-gray-600 hover:border-purple-500 text-white px-8 py-3 rounded-full text-lg font-medium transition duration-300">
+                        Latest Research
+                    </button>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-full max-w-md">
+                    <div
+                        class="absolute -top-10 -left-10 w-32 h-32 bg-purple-600 rounded-full filter blur-3xl opacity-30">
+                    </div>
+                    <div
+                        class="absolute -bottom-10 -right-10 w-32 h-32 bg-blue-600 rounded-full filter blur-3xl opacity-30">
+                    </div>
+                    <div class="card-gradient rounded-2xl p-1 neon-border floating">
+                        <div class="bg-gray-900 rounded-xl p-6 h-full">
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="flex space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <span class="text-xs text-gray-400">AI RESEARCH</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Transformers in 2024: What's Next?</h3>
+                            <p class="text-gray-400 text-sm mb-4">Exploring the latest advancements in transformer
+                                architectures and their applications beyond NLP...</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+                                        <i class="fas fa-robot text-white text-sm"></i>
+                                    </div>
+                                    <span class="text-sm">Dr. Alan Turing</span>
+                                </div>
+                                <span class="text-xs text-gray-500">5 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Articles -->
+    <section class="py-16 px-4">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="title-font text-3xl font-bold">
+                    <span class="gradient-text">Featured</span> Articles
+                </h2>
+                <a href="#" class="flex items-center text-purple-400 hover:text-purple-300 transition duration-300">
+                    View All <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <div class="card-gradient rounded-xl p-1 glow-effect hover:glow-effect transition duration-500 h-full">
+                    <div class="bg-gray-900 rounded-lg p-6 h-full flex flex-col">
+                        <div class="mb-4 relative overflow-hidden rounded-lg h-48">
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80"
+                                alt="AI" class="w-full h-full object-cover">
+                            <div class="absolute top-4 left-4">
+                                <span
+                                    class="bg-black bg-opacity-70 text-white text-xs px-3 py-1 rounded-full">NEW</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2 mb-4">
+                            <span
+                                class="tag bg-gray-800 text-blue-400 text-xs px-3 py-1 rounded-full transition duration-300">Deep
+                                Learning</span>
+                            <span
+                                class="tag bg-gray-800 text-purple-400 text-xs px-3 py-1 rounded-full transition duration-300">Research</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Understanding Diffusion Models for Image Generation</h3>
+                        <p class="text-gray-400 text-sm mb-4">A comprehensive guide to diffusion models, their
+                            architecture, and how they're revolutionizing image generation...</p>
+                        <div class="mt-auto flex justify-between items-center">
+                            <div class="flex items-center space-x-2">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xs"></i>
+                                </div>
+                                <span class="text-xs text-gray-400">Dr. Sarah Chen</span>
+                            </div>
+                            <span class="text-xs text-gray-500">8 min read</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="card-gradient rounded-xl p-1 glow-effect hover:glow-effect transition duration-500 h-full">
+                    <div class="bg-gray-900 rounded-lg p-6 h-full flex flex-col">
+                        <div class="mb-4 relative overflow-hidden rounded-lg h-48">
+                            <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80"
+                                alt="ML" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex space-x-2 mb-4">
+                            <span
+                                class="tag bg-gray-800 text-green-400 text-xs px-3 py-1 rounded-full transition duration-300">Tutorial</span>
+                            <span
+                                class="tag bg-gray-800 text-yellow-400 text-xs px-3 py-1 rounded-full transition duration-300">Python</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Building a Real-time Object Detection System with YOLOv8</h3>
+                        <p class="text-gray-400 text-sm mb-4">Step-by-step tutorial on implementing YOLOv8 for real-time
+                            object detection using Python and OpenCV...</p>
+                        <div class="mt-auto flex justify-between items-center">
+                            <div class="flex items-center space-x-2">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xs"></i>
+                                </div>
+                                <span class="text-xs text-gray-400">Alex Johnson</span>
+                            </div>
+                            <span class="text-xs text-gray-500">12 min read</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="card-gradient rounded-xl p-1 glow-effect hover:glow-effect transition duration-500 h-full">
+                    <div class="bg-gray-900 rounded-lg p-6 h-full flex flex-col">
+                        <div class="mb-4 relative overflow-hidden rounded-lg h-48">
+                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80"
+                                alt="LLM" class="w-full h-full object-cover">
+                            <div class="absolute top-4 left-4">
+                                <span
+                                    class="bg-black bg-opacity-70 text-white text-xs px-3 py-1 rounded-full pulse">TRENDING</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2 mb-4">
+                            <span
+                                class="tag bg-gray-800 text-pink-400 text-xs px-3 py-1 rounded-full transition duration-300">LLMs</span>
+                            <span
+                                class="tag bg-gray-800 text-orange-400 text-xs px-3 py-1 rounded-full transition duration-300">GPT-4</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">The Evolution of Large Language Models: From GPT-3 to GPT-5
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-4">Analyzing the architectural improvements and capabilities
+                            of each generation of GPT models and what to expect next...</p>
+                        <div class="mt-auto flex justify-between items-center">
+                            <div class="flex items-center space-x-2">
+                                <div
+                                    class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xs"></i>
+                                </div>
+                                <span class="text-xs text-gray-400">Prof. David Miller</span>
+                            </div>
+                            <span class="text-xs text-gray-500">15 min read</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Topics -->
+    <section class="py-16 px-4 bg-gray-900 bg-opacity-50">
+        <div class="container mx-auto">
+            <h2 class="title-font text-3xl font-bold mb-12 text-center">
+                <span class="gradient-text">Trending</span> Topics
+            </h2>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div
+                    class="bg-gray-800 hover:bg-gray-700 rounded-xl p-6 text-center transition duration-300 cursor-pointer glow-effect">
+                    <div
+                        class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium">Generative AI</h3>
+                </div>
+
+                <div
+                    class="bg-gray-800 hover:bg-gray-700 rounded-xl p-6 text-center transition duration-300 cursor-pointer glow-effect">
+                    <div
+                        class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-network-wired text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium">Neural Nets</h3>
+                </div>
+
+                <div
+                    class="bg-gray-800 hover:bg-gray-700 rounded-xl p-6 text-center transition duration-300 cursor-pointer glow-effect">
+                    <div
+                        class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                        <i class="fas fa-language text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium">NLP</h3>
+                </div>
+
+                <div
+                    class="bg-gray-800 hover:bg-gray-700 rounded-xl p-6 text-center transition duration-300 cursor-pointer glow-effect">
+                    <div
+                        class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
+                        <i class="fas fa-eye text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium">Computer Vision</h3>
+                </div>
+
+                <div
+                    class="bg-gray-800 hover:bg-gray-700 rounded-xl p-6 text-center transition duration-300 cursor-pointer glow-effect">
+                    <div
+                        class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium">Reinforcement</h3>
+                </div>
+
+                <div
+                    class="bg-gray-800 hover:bg-gray-700 rounded-xl p-6 text-center transition duration-300 cursor-pointer glow-effect">
+                    <div
+                        class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-dna text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium">Bio-AI</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Research -->
+    <section class="py-16 px-4">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="title-font text-3xl font-bold">
+                    <span class="gradient-text">Latest</span> Research
+                </h2>
+                <a href="#" class="flex items-center text-purple-400 hover:text-purple-300 transition duration-300">
+                    View All <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Research 1 -->
+                <div class="card-gradient rounded-xl p-1 glow-effect hover:glow-effect transition duration-500">
+                    <div class="bg-gray-900 rounded-lg p-6 flex flex-col md:flex-row">
+                        <div class="md:w-1/3 mb-4 md:mb-0 md:mr-6">
+                            <div class="relative overflow-hidden rounded-lg h-40">
+                                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80"
+                                    alt="Quantum AI" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="md:w-2/3">
+                            <div class="flex space-x-2 mb-3">
+                                <span class="bg-gray-800 text-blue-400 text-xs px-3 py-1 rounded-full">Quantum AI</span>
+                                <span class="bg-gray-800 text-purple-400 text-xs px-3 py-1 rounded-full">Paper</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Quantum Machine Learning: Hybrid Approaches for Faster
+                                Training</h3>
+                            <p class="text-gray-400 text-sm mb-4">This paper explores hybrid quantum-classical
+                                algorithms that promise to accelerate training of deep neural networks by orders of
+                                magnitude...</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+                                        <i class="fas fa-user text-white text-xs"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-400">Quantum AI Lab</span>
+                                </div>
+                                <span class="text-xs text-gray-500">Jun 15, 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Research 2 -->
+                <div class="card-gradient rounded-xl p-1 glow-effect hover:glow-effect transition duration-500">
+                    <div class="bg-gray-900 rounded-lg p-6 flex flex-col md:flex-row">
+                        <div class="md:w-1/3 mb-4 md:mb-0 md:mr-6">
+                            <div class="relative overflow-hidden rounded-lg h-40">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80"
+                                    alt="NeuroAI" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        <div class="md:w-2/3">
+                            <div class="flex space-x-2 mb-3">
+                                <span
+                                    class="bg-gray-800 text-green-400 text-xs px-3 py-1 rounded-full">Neuroscience</span>
+                                <span class="bg-gray-800 text-yellow-400 text-xs px-3 py-1 rounded-full">Study</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">Brain-Inspired Architectures for Few-Shot Learning</h3>
+                            <p class="text-gray-400 text-sm mb-4">Our research demonstrates how neural networks inspired
+                                by hippocampal circuits can achieve human-like few-shot learning capabilities...</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+                                        <i class="fas fa-user text-white text-xs"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-400">NeuroAI Team</span>
+                                </div>
+                                <span class="text-xs text-gray-500">Jun 10, 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 px-4 bg-gradient-to-br from-gray-900 to-gray-800">
+        <div class="container mx-auto max-w-4xl">
+            <div class="card-gradient rounded-2xl p-1 neon-border">
+                <div class="bg-gray-900 rounded-xl p-8 md:p-12 text-center">
+                    <h2 class="title-font text-3xl md:text-4xl font-bold mb-6">
+                        Join Our <span class="gradient-text">AI Community</span>
+                    </h2>
+                    <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
+                        Get weekly updates on the latest AI research, tutorials, and industry news delivered straight to
+                        your inbox.
+                    </p>
+                    <div class="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
+                        <input type="email" placeholder="Your email address"
+                            class="flex-grow bg-gray-800 text-white rounded-full py-3 px-6 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        <button
+                            class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-full font-medium transition duration-300 glow-effect">
+                            Subscribe
+                        </button>
+                    </div>
+                    <p class="text-gray-500 text-xs mt-4">
+                        We respect your privacy. Unsubscribe at any time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center">
+                            <i class="fas fa-brain text-white text-xl"></i>
+                        </div>
+                        <h3 class="title-font text-xl font-bold gradient-text">NeuralNexus</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Exploring the frontiers of artificial intelligence and machine learning through research,
+                        tutorials, and thought leadership.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-medium mb-4">Categories</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Deep
+                                Learning</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Natural
+                                Language Processing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Computer
+                                Vision</a></li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-white transition duration-300 text-sm">Reinforcement
+                                Learning</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">AI
+                                Ethics</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-medium mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Research
+                                Papers</a></li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-white transition duration-300 text-sm">Tutorials</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-gray-400 hover:text-white transition duration-300 text-sm">Datasets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Tools</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Books</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-medium mb-4">Connect</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-gray-300 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-gray-300 hover:text-white transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-gray-300 hover:text-white transition duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center text-gray-300 hover:text-white transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        contact@neuralnexus.ai<br>
+                        +1 (555) 123-4567
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 NeuralNexus. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-gray-300 transition duration-300 text-sm">Privacy
+                        Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 transition duration-300 text-sm">Terms of
+                        Service</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 transition duration-300 text-sm">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('button.md\\:hidden').addEventListener('click', function () {
+            const nav = document.querySelector('nav.hidden.md\\:flex');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('absolute');
+            nav.classList.toggle('top-16');
+            nav.classList.toggle('left-0');
+            nav.classList.toggle('right-0');
+            nav.classList.toggle('bg-gray-900');
+            nav.classList.toggle('p-4');
+            nav.classList.toggle('flex-col');
+            nav.classList.toggle('space-y-4');
+            nav.classList.toggle('space-x-0');
+        });
+
+        // Floating animation for multiple elements
+        const floatingElements = document.querySelectorAll('.floating');
+        floatingElements.forEach((el, index) => {
+            el.style.animationDelay = `${index * 0.5}s`;
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                alert('Search functionality would be implemented here. You searched for: ' + this.value);
+                this.value = '';
+            }
+        });
+
+        // Subscribe button animation
+        const subscribeButtons = document.querySelectorAll('button:contains("Subscribe")');
+        subscribeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                this.innerHTML = '<i class="fas fa-check mr-2"></i> Subscribed!';
+                this.classList.remove('bg-gradient-to-r', 'from-blue-500', 'to-purple-600');
+                this.classList.add('bg-green-500');
+                setTimeout(() => {
+                    this.innerHTML = 'Subscribe';
+                    this.classList.add('bg-gradient-to-r', 'from-blue-500', 'to-purple-600');
+                    this.classList.remove('bg-green-500');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+
+</html>
