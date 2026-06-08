@@ -10,8 +10,8 @@ export default function HomePage() {
           <p className="hero-role">{resume.role}</p>
           <p className="hero-summary">{resume.summary}</p>
           <div className="hero-actions">
-            <a href={`mailto:${resume.email}`} className="button">
-              Email me
+            <a href={resume.linkedin} className="button" target="_blank" rel="noreferrer">
+              Connect on LinkedIn
             </a>
             <span className="button ghost disabled" aria-disabled="true">
               Blog launching soon
@@ -23,21 +23,15 @@ export default function HomePage() {
           <p className="hero-note">{resume.availability.note}</p>
           <div className="contact-grid">
             <div className="contact-item">
-              <p className="label">Email</p>
-              <a href={`mailto:${resume.email}`} className="contact-value text-link">
-                {resume.email}
-              </a>
-            </div>
-            <div className="contact-item">
-              <p className="label">Phone</p>
-              <a href={`tel:${resume.phone}`} className="contact-value text-link">
-                {resume.phone}
-              </a>
-            </div>
-            <div className="contact-item">
               <p className="label">Site</p>
               <a href={resume.website} className="contact-value text-link" target="_blank" rel="noreferrer">
                 {new URL(resume.website).host}
+              </a>
+            </div>
+            <div className="contact-item">
+              <p className="label">LinkedIn</p>
+              <a href={resume.linkedin} className="contact-value text-link" target="_blank" rel="noreferrer">
+                Rohin Patel
               </a>
             </div>
           </div>

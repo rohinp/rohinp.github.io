@@ -31,9 +31,8 @@ export type ResumeData = {
   name: string;
   role: string;
   location: string;
-  email: string;
-  phone: string;
   website: string;
+  linkedin: string;
   summary: string;
   availability: {
     status: string;
@@ -51,9 +50,8 @@ export const resume: ResumeData = {
   name: "Rohin Patel",
   role: "Senior Software Engineer · AI Platform Lead",
   location: "Amsterdam, NL",
-  email: "rohin.patel@outlook.com",
-  phone: "+31 621 388 735",
   website: "https://rohin-lab.com",
+  linkedin: "https://www.linkedin.com/in/rohin-patel-33807626/",
   summary:
     "Senior Software Engineer and technical leader with 15+ years designing distributed systems, cyber security products, and AI-powered applications across global enterprises.",
   availability: {
