@@ -14,6 +14,7 @@ export type CompetencyGroup = {
 export type Contribution = {
   title: string;
   description: string;
+  url?: string;
 };
 
 export type Talk = {
@@ -33,6 +34,7 @@ export type ResumeData = {
   location: string;
   website: string;
   linkedin: string;
+  github: string;
   summary: string;
   availability: {
     status: string;
@@ -52,6 +54,7 @@ export const resume: ResumeData = {
   location: "Amsterdam, NL",
   website: "https://rohin-lab.com",
   linkedin: "https://www.linkedin.com/in/rohin-patel-33807626/",
+  github: "https://github.com/rohinp",
   summary:
     "Senior Software Engineer and technical leader with 15+ years designing distributed systems, cyber security products, and AI-powered applications across global enterprises.",
   availability: {
@@ -173,6 +176,16 @@ export const resume: ResumeData = {
     },
   ],
   openSource: [
+    {
+      title: "Maris",
+      url: "https://github.com/rohinp/maris",
+      description: "A lightweight personal knowledge system for stitching together markdown journals, tasks, and prompts.",
+    },
+    {
+      title: "Weave",
+      url: "https://github.com/rohinp/weave",
+      description: "An experiment in building composable workflow graphs for AI/automation projects using simple JSON specs.",
+    },
     {
       title: "Dhall-Scala",
       description: "Contributor enabling Scala services to consume Dhall configuration files across the ecosystem.",

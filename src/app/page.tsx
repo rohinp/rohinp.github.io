@@ -34,6 +34,12 @@ export default function HomePage() {
                 Rohin Patel
               </a>
             </div>
+            <div className="contact-item">
+              <p className="label">GitHub</p>
+              <a href={resume.github} className="contact-value text-link" target="_blank" rel="noreferrer">
+                @rohinp
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -96,7 +102,15 @@ export default function HomePage() {
             <p className="label">Open Source</p>
             {resume.openSource.map((project) => (
               <div key={project.title} className="list-card">
-                <p className="list-card__title">{project.title}</p>
+                <p className="list-card__title">
+                  {project.url ? (
+                    <a href={project.url} target="_blank" rel="noreferrer" className="text-link">
+                      {project.title}
+                    </a>
+                  ) : (
+                    project.title
+                  )}
+                </p>
                 <p className="list-card__meta">{project.description}</p>
               </div>
             ))}
