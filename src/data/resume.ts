@@ -179,12 +179,12 @@ export const resume: ResumeData = {
     {
       title: "Maris",
       url: "https://github.com/rohinp/maris",
-      description: "A lightweight personal knowledge system for stitching together markdown journals, tasks, and prompts.",
+      description: "MARIS is a local-first, multi-agent repository intelligence system for understanding source code. It indexes repositories with language-aware parsers, stores repository knowledge locally, and uses local Ollama models for search, Q&A, documentation, and impact analysis.",
     },
     {
       title: "Weave",
       url: "https://github.com/rohinp/weave",
-      description: "An experiment in building composable workflow graphs for AI/automation projects using simple JSON specs.",
+      description: "A Scala-first workflow and agent orchestration library inspired by graph-based execution systems like LangGraph, designed as a hands-on exploration of typed workflows, runtime orchestration, and actor-based execution on the JVM.",
     },
     {
       title: "Dhall-Scala",
