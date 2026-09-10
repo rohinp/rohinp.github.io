@@ -30,6 +30,7 @@ export default function RootLayout({
               </div>
               <nav className="site-nav">
                 <Link href="/">Resume</Link>
+                <Link href="/math-art">Math Art</Link>
               </nav>
             </header>
 

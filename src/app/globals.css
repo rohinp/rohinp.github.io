@@ -100,6 +100,584 @@ code {
   padding-top: 32px;
 }
 
+/* The sandbox puts controls either side of the canvas, so it needs the extra width. */
+.app-frame:has(.math-art-shell) {
+  max-width: 1520px;
+  padding: 16px 24px 24px;
+}
+
+.math-art-shell {
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.math-art-shell .page-header h1 {
+  font-size: 1.5rem;
+  margin: 2px 0;
+}
+
+.math-art-shell .page-label {
+  margin-bottom: 4px;
+}
+
+.math-art-shell .page-subtitle {
+  max-width: 760px;
+  font-size: 0.9rem;
+}
+
+.math-art-workbench {
+  display: grid;
+  /* Proportional so the canvas keeps growing on wide screens without starving at 1280. */
+  grid-template-columns:
+    minmax(250px, 0.8fr)
+    minmax(0, 1.7fr)
+    minmax(258px, 0.85fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.material-card.math-art-stage {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.math-art-canvas {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.math-art-canvas canvas {
+  display: block;
+  /* p5 pins width/height inline; release them so the canvas can scale to the
+     space left over after the toolbar and equation chips. */
+  width: auto !important;
+  height: auto !important;
+  max-width: 100%;
+  max-height: clamp(240px, calc(100vh - 480px), 520px);
+  margin: 0 auto;
+  border-radius: 16px;
+}
+
+.material-card.math-art-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  /* Sized to the viewport so the whole panel — and every control in it —
+     stays on screen while the canvas keeps its own column. */
+  max-height: calc(100vh - 250px);
+  min-height: 360px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+/* Keep the overflow affordance visible on the dark surface. */
+.material-card.math-art-controls::-webkit-scrollbar {
+  width: 8px;
+}
+
+.material-card.math-art-controls::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+
+.material-card.math-art-controls::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.material-card.math-art-controls::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.math-art-panel-head .page-label {
+  margin: 0;
+}
+
+.math-art-panel-head h2 {
+  font-size: 1.05rem;
+  margin: 2px 0 0;
+}
+
+.math-art-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.math-art-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.math-art-block,
+.math-art-slider {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--text-muted);
+}
+
+.math-art-slider {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.math-art-slider span {
+  display: flex;
+  justify-content: space-between;
+}
+
+.math-art-slider strong {
+  color: var(--primary-soft);
+}
+
+.math-art-slider input {
+  accent-color: var(--primary);
+}
+
+/* Beats .math-art-section (declared later) which sets display: flex. */
+.math-art-section.math-art-equations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 6px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+.math-art-equations > .label {
+  grid-column: 1 / -1;
+}
+
+.math-art-equation {
+  background: rgba(5, 6, 10, 0.35);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 7px 10px;
+}
+
+/* Opening one equation promotes it to a full-width row. */
+.math-art-equation[open] {
+  grid-column: 1 / -1;
+}
+
+.math-art-equation summary {
+  cursor: pointer;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.math-art-equation pre {
+  color: var(--primary-soft);
+  font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  margin: 10px 0 6px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.math-art-equation p {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.math-art-layers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  margin-top: 10px;
+}
+
+.math-art-layers .label {
+  margin: 0;
+}
+
+.math-art-layer-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.math-art-layer {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.math-art-layer-verb {
+  font-size: 0.6rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.math-art-layer--base .math-art-layer-verb {
+  color: var(--success);
+}
+
+.math-art-layer--modifier .math-art-layer-verb {
+  color: #ffb066;
+}
+
+.math-art-layer-label {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.math-art-export {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+.math-art-export .label {
+  margin: 0;
+}
+
+.math-art-export .math-art-note {
+  flex-basis: 100%;
+  font-size: 0.78rem;
+}
+
+.math-art-export .button {
+  padding: 8px 14px;
+  font-size: 0.82rem;
+}
+
+.math-art-scale {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.math-art-scale button {
+  min-width: 40px;
+  padding: 6px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(5, 6, 10, 0.3);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.math-art-scale button:hover {
+  color: var(--text);
+}
+
+.math-art-scale button.is-active {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.math-art-note {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.math-art-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.math-art-toolbar .button {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+.math-art-toolbar-note {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.math-art-seed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(5, 6, 10, 0.45);
+}
+
+.math-art-seed .label {
+  margin: 0;
+}
+
+.math-art-seed input {
+  width: 92px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.math-art-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.math-art-section--first {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.math-art-stack {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.math-art-stack-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(5, 6, 10, 0.3);
+  opacity: 0.55;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.math-art-stack-row.is-on {
+  opacity: 1;
+  border-color: rgba(63, 140, 255, 0.4);
+}
+
+.math-art-stack-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.math-art-stack-row.is-on .math-art-stack-toggle {
+  color: var(--text);
+}
+
+.math-art-stack-toggle input {
+  accent-color: var(--primary);
+}
+
+.math-art-stack-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.math-art-role {
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.math-art-role--base {
+  border-color: rgba(61, 213, 152, 0.45);
+  color: var(--success);
+}
+
+.math-art-role--modifier {
+  border-color: rgba(255, 123, 0, 0.45);
+  color: #ffb066;
+}
+
+.math-art-reorder {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.math-art-reorder button {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.55rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.math-art-reorder button:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--primary);
+}
+
+.math-art-reorder button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.math-art-palettes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.math-art-palette {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(5, 6, 10, 0.3);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.math-art-palette:hover {
+  color: var(--text);
+}
+
+.math-art-palette.is-active {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.math-art-palette-swatches {
+  display: flex;
+  gap: 3px;
+  height: 9px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.math-art-palette-swatches i {
+  flex: 1;
+}
+
+.math-art-presets {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.math-art-preset {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-align: left;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(5, 6, 10, 0.3);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.math-art-preset:hover {
+  transform: translateY(-1px);
+}
+
+.math-art-preset.is-active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px rgba(63, 140, 255, 0.35);
+}
+
+.math-art-preset small {
+  color: var(--text-muted);
+  font-size: 0.66rem;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.math-art-param-group {
+  background: rgba(5, 6, 10, 0.35);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.math-art-param-group summary {
+  cursor: pointer;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+@media (max-width: 1180px) {
+  .math-art-workbench {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .material-card.math-art-stage {
+    grid-column: 1 / -1;
+    order: -1;
+    position: static;
+  }
+
+  .material-card.math-art-controls {
+    max-height: none;
+    min-height: 0;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 860px) {
+  .math-art-workbench {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .material-card.math-art-stage {
+    grid-column: auto;
+  }
+}
+
+
 .home-shell {
   gap: 32px;
 }
