@@ -1,8 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import p5 from "p5";
-import { createGIF } from "gifshot";
+// Both p5 and gifshot execute browser-only code the moment their module is
+// evaluated: p5's DOM addon pokes `navigator.mediaDevices`, and gifshot is an
+// IIFE that reads `window.URL`. A plain import therefore puts them in the
+// server bundle and crashes prerendering, so they are loaded lazily further
+// down (see the mount effect and downloadGif). The type is still imported
+// statically because it is erased at compile time.
+import type p5 from "p5";
 import {
   animateStrands,
   applyModifier,
@@ -99,6 +104,9 @@ export default function MathArtCanvas() {
 
   useEffect(() => {
     if (!mountRef.current) return;
+
+    let instance: p5 | null = null;
+    let cancelled = false;
 
     const sketch = (instance: p5) => {
       let phase = 0;
@@ -206,9 +214,18 @@ export default function MathArtCanvas() {
       };
     };
 
-    const instance = new p5(sketch);
+    // Loaded on demand so p5 never reaches the server bundle. The cleanup flag
+    // covers React's StrictMode double-invoke: the first run is torn down before
+    // its import resolves, so it must not create an orphan canvas.
+    void (async () => {
+      const { default: P5 } = await import("p5");
+      if (cancelled) return;
+      instance = new P5(sketch);
+    })();
+
     return () => {
-      instance.remove();
+      cancelled = true;
+      instance?.remove();
       instanceRef.current = null;
       renderRef.current = null;
     };
@@ -276,7 +293,7 @@ export default function MathArtCanvas() {
     buffer.remove();
   };
 
-  const downloadGif = () => {
+  const downloadGif = async () => {
     const instance = instanceRef.current;
     const render = renderRef.current;
     if (!instance || !render || exporting) return;
@@ -297,6 +314,8 @@ export default function MathArtCanvas() {
       setExportProgress(Math.round(((i + 1) / frames) * 40));
     }
     buffer.remove();
+    // Fetched on demand: gifshot reads `window` while its module evaluates.
+    const { createGIF } = await import("gifshot");
     createGIF(
       {
         images,
